@@ -11,9 +11,9 @@ AddEventHandler('viperz_zonasentorno:guardardatos', function(message, coords, ra
             ['@notification_type'] = notification_type
         }, function(rowsChanged)
             if rowsChanged > 0 then
-                xPlayer.showNotification('Datos guardados correctamente.')
+                TriggerClientEvent('esx:showNotification', _source, 'Datos guardados correctamente.')
             else
-                xPlayer.showNotification('Hubo un error al guardar los datos.')
+                TriggerClientEvent('esx:showNotification', _source, 'Hubo un error al guardar los datos.')
             end
         end)
     end
@@ -40,13 +40,25 @@ ESX.RegisterServerCallback('viperz_zonasentorno:cargardatos', function(source, c
     end)
 end)
 
-function stringsplit(inputstr, sep)
-    if sep == nil then
-        sep = "%s"
-    end
-    local t={}
-    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-        table.insert(t, str)
-    end
-    return t
-end
+RegisterServerEvent('requestZonasEntorno')
+AddEventHandler('requestZonasEntorno', function()
+    local src = source
+    MySQL.Async.fetchAll('SELECT * FROM zonasentorno', {}, function(zonas)
+        TriggerClientEvent('receiveZonasEntorno', src, zonas)
+    end)
+end)
+
+RegisterServerEvent('eliminarZonaEntorno')
+AddEventHandler('eliminarZonaEntorno', function(zonaId)
+    MySQL.Async.execute('DELETE FROM zonasentorno WHERE id = @zonaId', {
+        ['@zonaId'] = zonaId
+    }, function(affectedRows)
+        if affectedRows > 0 then
+            TriggerClientEvent('esx:showNotification', source, 'Zona eliminada correctamente.')
+        else
+            TriggerClientEvent('esx:showNotification', source, 'Error al eliminar la zona.')
+        end
+    end)
+end)
+
+
