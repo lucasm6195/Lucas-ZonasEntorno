@@ -1,6 +1,7 @@
-> - /entornozona
-> - Chat [chat:addMessage]
-> - Notification [ESX.ShowNotification]
+- /entornozona
+- Chat [chat:addMessage]
+- Notification [ESX.ShowNotification]
+  
 ﻿![image](https://github.com/user-attachments/assets/f8afd311-9880-478b-8010-25f2e3291614)
 ![image](https://github.com/user-attachments/assets/46dc8663-88f2-408e-a2bf-250c4b29cfad)
 ![image](https://github.com/user-attachments/assets/d0074b07-ee5f-47e6-8db9-3f2cec17e9ad)
