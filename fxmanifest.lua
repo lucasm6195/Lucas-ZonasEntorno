@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'mano.6195'
-description 'https://discord.gg/viperz'
+description 'https://discord.gg/FneHKSpemC'
 lua54 'yes'
 client_scripts {
     'client/*.lua'
